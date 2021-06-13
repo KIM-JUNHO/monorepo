@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 
-const Header = () => {
+const Header = ({ isDark }) => {
   return (
-    <HeaderStyled>
+    <HeaderStyled isDark={isDark}>
       <div className="container">
         <div className="logo">
           <img src="/images/logo.svg" alt="Sites logo" />
@@ -14,7 +14,7 @@ const Header = () => {
 };
 
 const HeaderStyled = styled.header`
-  background: '#efefef';
+  background: ${(props) => (props.isDark ? '#000000' : '#efefef')};
   padding: 20px;
   .logo {
     display: flex;
