@@ -6,15 +6,17 @@ import theme from '../theme/theme';
 const Home = ({ movies }) => {
   console.log(movies);
   return (
-    <Box
-      theme={theme}
-      variant="container"
-      bg={['red', 'orange', 'yellow', 'green', 'blue', 'purple']}
-    >
-      <h2>Latest Movies</h2>
-      {movies.map((movie) => (
-        <Card key={movie.id} movie={movie} />
-      ))}
+    <Box theme={theme} variant="container">
+      <Box my={40} as="h2">
+        Latest Movies
+      </Box>
+      <Flex justifyContent="space-between" flexDirection={['column', null, null, 'row']}>
+        {movies.map((movie) => (
+          <Box key={movie.id} width={['100%', null, null, '30%']}>
+            <Card movie={movie} />
+          </Box>
+        ))}
+      </Flex>
     </Box>
   );
 };
