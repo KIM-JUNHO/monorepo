@@ -5,7 +5,7 @@ const Header = () => {
 };
 
 const HeaderStyled = styled.header`
-  background: #efefef;
+  background: ${(props) => props.theme.colors.primary};
 `;
 
 export default Header;
