@@ -1,5 +1,11 @@
-const About = () => {
-  return <header>Now I AM a real Header</header>;
+import styled from '@emotion/styled';
+
+const Header = () => {
+  return <HeaderStyled>Now I AM a real Header</HeaderStyled>;
 };
 
-export default About;
+const HeaderStyled = styled.header`
+  background: #efefef;
+`;
+
+export default Header;
