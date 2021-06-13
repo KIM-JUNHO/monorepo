@@ -1,11 +1,12 @@
 import fetch from 'isomorphic-unfetch';
 import Card from 'components/Card';
 import { Flex, Box } from 'reflexbox';
+import theme from '../theme/theme';
 
 const Home = ({ movies }) => {
   console.log(movies);
   return (
-    <Box maxWidth={960} width="100%" mx="auto" px={30}>
+    <Box theme={theme} variant="container">
       <h2>Latest Movies</h2>
       {movies.map((movie) => (
         <Card key={movie.id} movie={movie} />
