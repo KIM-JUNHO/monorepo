@@ -6,7 +6,11 @@ import theme from '../theme/theme';
 const Home = ({ movies }) => {
   console.log(movies);
   return (
-    <Box theme={theme} variant="container" bg={['red', 'green', 'blue', 'black']}>
+    <Box
+      theme={theme}
+      variant="container"
+      bg={['red', 'orange', 'yellow', 'green', 'blue', 'purple']}
+    >
       <h2>Latest Movies</h2>
       {movies.map((movie) => (
         <Card key={movie.id} movie={movie} />
