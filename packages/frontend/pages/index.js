@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-unfetch';
+import Card from 'components/Card';
 
 const Home = ({
   movies = [
@@ -8,7 +9,7 @@ const Home = ({
 }) => {
   return (
     <div className="container">
-      {movies && movies.map((movie) => <div key={movie.id}>{movie.title}</div>)}
+      {movies && movies.map((movie) => <Card key={movie.id} movie={movie} />)}
     </div>
   );
 };
