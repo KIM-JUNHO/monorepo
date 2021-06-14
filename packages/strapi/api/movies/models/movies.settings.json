@@ -34,6 +34,12 @@
       "collection": "actors",
       "via": "movies",
       "dominant": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "slug": {
+      "type": "string"
     }
   }
 }
