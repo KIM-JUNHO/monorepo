@@ -4,11 +4,15 @@ import GlobalStyles from 'components/GlobalStyles/GlobalStyles';
 import theme from '../theme/theme';
 import getConfig from 'next/config';
 import fetch from 'isomorphic-unfetch';
+import { DefaultSeo } from 'next-seo';
+
+import SEO from '../next-seo.config';
 
 function MyApp({ Component, pageProps, navigation }) {
   console.log(navigation);
   return (
     <>
+      <DefaultSeo {...SEO} />
       <ThemeProvider theme={theme}>
         <GlobalStyles />
         <Header navigation={navigation} />

@@ -2,19 +2,33 @@ import { Box, Flex } from 'reflexbox';
 import getConfig from 'next/config';
 import fetch from 'isomorphic-unfetch';
 import theme from '../../../theme/theme';
+import { NextSeo } from 'next-seo';
 
 function Movie({ movie }) {
   console.log(movie);
 
+  const SEO = {
+    title: `Next Movies | ${movie.title}`,
+    description: movie.description,
+
+    openGraph: {
+      title: `Next Movies | ${movie.title}`,
+      description: movie.title,
+    },
+  };
+
   return (
-    <Box theme={theme} variant="container">
-      <Box as="h2" my={40}>
-        {movie.title}
+    <>
+      <NextSeo {...SEO} />
+      <Box theme={theme} variant="container">
+        <Box as="h2" my={40}>
+          {movie.title}
+        </Box>
+        <Box maxWidth={600}>
+          <p dangerouslySetInnerHTML={{ __html: movie.description }}></p>
+        </Box>
       </Box>
-      <Box maxWidth={600}>
-        <p dangerouslySetInnerHTML={{ __html: movie.description }}></p>
-      </Box>
-    </Box>
+    </>
   );
 }
 
