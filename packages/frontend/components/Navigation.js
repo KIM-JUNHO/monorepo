@@ -8,11 +8,11 @@ const Navigation = () => {
   const router = useRouter();
   console.log(router);
 
-  const { menuItems } = useContext(HeaderContext);
+  const { menuItems, color } = useContext(HeaderContext);
   console.log(menuItems);
 
   return (
-    <NavigationStyled>
+    <NavigationStyled color={color}>
       <ul>
         {menuItems &&
           menuItems.map((item) => (
@@ -40,7 +40,7 @@ const NavigationStyled = styled.div`
 
     a {
       text-decoration: none;
-      color: #4c9ee3;
+      color: ${(props) => (props.color ? '#4c9ee3' : '#000000')};
 
       &:hover {
         text-decoration: underline;
