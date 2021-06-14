@@ -1,15 +1,21 @@
 import styled from '@emotion/styled';
 import { rem } from 'polished';
+import { Flex, Box } from 'reflexbox';
+import theme from '../theme/theme';
+import Navigation from './Navigation';
 
 const Header = ({ isDark }) => {
   return (
     <HeaderStyled isDark={isDark}>
-      <div className="container">
-        <div className="logo">
-          <img src="/images/logo.svg" alt="Sites logo" />
-          <span className="logo-text">Next Movies</span>
-        </div>
-      </div>
+      <Box theme={theme} variant="container">
+        <Flex justifyContent="space-between" alignItems="center">
+          <div className="logo">
+            <img src="/images/logo.svg" alt="Sites logo" />
+            <span className="logo-text">Next Movies</span>
+          </div>
+          <Navigation />
+        </Flex>
+      </Box>
     </HeaderStyled>
   );
 };
