@@ -1,16 +1,21 @@
 import styled from '@emotion/styled';
+import Link from 'next/link';
 
 const Card = ({ movie }) => {
   const { API_URL } = process.env;
 
   return (
     <CardStyled>
-      <div className="poster">
+      {/* <div className="poster">
         <img src={API_URL + movie.poster.url} alt="" />
-      </div>
+      </div> */}
       <div className="body">
         <h3>{movie.title}</h3>
         <p dangerouslySetInnerHTML={{ __html: movie.description }} />
+
+        <Link href="/movies/[slug]" as={`/movies/${movie.slug}`}>
+          <a>More about this movie</a>
+        </Link>
       </div>
     </CardStyled>
   );
