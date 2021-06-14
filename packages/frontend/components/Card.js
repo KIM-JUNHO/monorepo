@@ -13,7 +13,7 @@ const Card = ({ movie }) => {
         <h3>{movie.title}</h3>
         <p dangerouslySetInnerHTML={{ __html: movie.description }} />
 
-        <Link href="/movies/[slug]" as={`/movies/${movie.slug}`}>
+        <Link href="/movies/[genre]/[slug]" as={`/movies/${movie.genre.slug}/${movie.slug}`}>
           <a>More about this movie</a>
         </Link>
       </div>

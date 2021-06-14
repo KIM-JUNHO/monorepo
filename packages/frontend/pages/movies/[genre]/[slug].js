@@ -1,7 +1,7 @@
 import { Box, Flex } from 'reflexbox';
 import getConfig from 'next/config';
 import fetch from 'isomorphic-unfetch';
-import theme from '../../theme/theme';
+import theme from '../../../theme/theme';
 
 function Movie({ movie }) {
   console.log(movie);
