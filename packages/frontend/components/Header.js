@@ -5,7 +5,7 @@ import theme from '../theme/theme';
 import Navigation from './Navigation';
 import Link from 'next/link';
 
-const Header = ({ isDark }) => {
+const Header = ({ isDark, navigation }) => {
   return (
     <HeaderStyled isDark={isDark}>
       <Box theme={theme} variant="container">
@@ -18,7 +18,7 @@ const Header = ({ isDark }) => {
               </a>
             </Link>
           </div>
-          <Navigation />
+          <Navigation navigation={navigation} />
         </Flex>
       </Box>
     </HeaderStyled>

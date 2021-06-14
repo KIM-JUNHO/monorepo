@@ -2,28 +2,20 @@ import styled from '@emotion/styled';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-const Navigation = () => {
+const Navigation = ({ navigation }) => {
   const router = useRouter();
   console.log(router);
 
   return (
     <NavigationStyled>
       <ul>
-        <li>
-          <Link href="/about">
-            <a className={router.pathname === '/about' ? 'active' : ''}>About</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/blog">
-            <a className={router.pathname === '/blog' ? 'active' : ''}>Blog</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/contact">
-            <a className={router.pathname === '/contact' ? 'active' : ''}>Contact</a>
-          </Link>
-        </li>
+        {navigation.map((item) => (
+          <li key={item.id}>
+            <Link href={item.slug}>
+              <a className={router.pathname === item.slug ? 'active' : ''}>{item.title}</a>
+            </Link>
+          </li>
+        ))}
       </ul>
     </NavigationStyled>
   );
