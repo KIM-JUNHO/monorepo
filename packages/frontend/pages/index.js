@@ -10,7 +10,12 @@ const Home = ({ movies }) => {
       <Box my={40} as="h2">
         Latest Movies
       </Box>
-      <Flex justifyContent="space-between" flexDirection={['column', null, null, 'row']}>
+      <Flex
+        justifyContent="space-between"
+        flexDirection={['column', null, null, 'row']}
+        mb={100}
+        flexWrap="wrap"
+      >
         {movies.map((movie) => (
           <Box key={movie.id} width={['100%', null, null, '30%']}>
             <Card movie={movie} />
