@@ -3,6 +3,7 @@ import { rem } from 'polished';
 import { Flex, Box } from 'reflexbox';
 import theme from '../theme/theme';
 import Navigation from './Navigation';
+import Link from 'next/link';
 
 const Header = ({ isDark }) => {
   return (
@@ -10,8 +11,12 @@ const Header = ({ isDark }) => {
       <Box theme={theme} variant="container">
         <Flex justifyContent="space-between" alignItems="center">
           <div className="logo">
-            <img src="/images/logo.svg" alt="Sites logo" />
-            <span className="logo-text">Next Movies</span>
+            <Link href="/">
+              <a>
+                <img src="/images/logo.svg" alt="Sites logo" />
+                <span className="logo-text">Next Movies</span>
+              </a>
+            </Link>
           </div>
           <Navigation />
         </Flex>
@@ -24,8 +29,11 @@ const HeaderStyled = styled.header`
   background: ${(props) => (props.isDark ? '#000000' : '#efefef')};
   padding: 20px;
   .logo {
-    display: flex;
-    align-items: center;
+    a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
     .logo-text {
       color: #333333;
       font-weight: bold;
