@@ -4,7 +4,7 @@ import { Flex, Box } from 'reflexbox';
 import theme from '../theme/theme';
 import Navigation from './Navigation';
 import Link from 'next/link';
-import ToggleNavigationColorButton from './ToggleNavigationColorButton';
+import LanguageSwitcher from './LanguagesSwitcher';
 
 const Header = ({ isDark }) => {
   return (
@@ -20,7 +20,7 @@ const Header = ({ isDark }) => {
             </Link>
           </div>
           <Navigation />
-          <ToggleNavigationColorButton />
+          <LanguageSwitcher />
         </Flex>
       </Box>
     </HeaderStyled>

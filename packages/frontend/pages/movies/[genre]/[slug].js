@@ -5,8 +5,6 @@ import theme from '../../../theme/theme';
 import { NextSeo } from 'next-seo';
 
 function Movie({ movie }) {
-  console.log(movie);
-
   const SEO = {
     title: `Next Movies | ${movie.title}`,
     description: movie.description,

@@ -6,11 +6,7 @@ import HeaderContext from '../contexts/HeaderContext';
 
 const Navigation = () => {
   const router = useRouter();
-  console.log(router);
-
   const { menuItems, color } = useContext(HeaderContext);
-  console.log(menuItems);
-
   return (
     <NavigationStyled color={color}>
       <ul>
