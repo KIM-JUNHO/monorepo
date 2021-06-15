@@ -5,6 +5,7 @@ import theme from '../theme/theme';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
+import propTypes from 'prop-types';
 
 const Home = ({ movies }) => {
   const { t } = useTranslation('common');
@@ -28,6 +29,10 @@ const Home = ({ movies }) => {
       </Flex>
     </Box>
   );
+};
+
+Home.propTypes = {
+  movies: propTypes.array.isRequired,
 };
 
 export async function getServerSideProps({ locale }) {

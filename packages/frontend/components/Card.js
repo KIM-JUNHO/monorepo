@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import Image from 'next/image';
+import propTypes from 'prop-types';
 
 const Card = ({ movie }) => {
   const { IMAGES_DOMAIN } = process.env;
@@ -27,6 +28,10 @@ const Card = ({ movie }) => {
       </div>
     </CardStyled>
   );
+};
+
+Card.propTypes = {
+  movie: propTypes.object.isRequired,
 };
 
 const CardStyled = styled.div`
