@@ -9,12 +9,12 @@ function PayedArticles({ articles, authData }) {
         <Box as="h2" my={40}>
           Payed Articles
         </Box>
-        {/* {articles.map((article) => (
+        {articles.map((article) => (
           <div className="article" key={article.id}>
             <h3>{article.title}</h3>
             <p dangerouslySetInnerHTML={{ __html: article.body }} />
           </div>
-        ))} */}
+        ))}
       </Box>
     </>
   );
@@ -38,7 +38,11 @@ export async function getServerSideProps(ctx) {
   });
   const loginResponse = await login.json();
 
-  const res = await fetch(`${publicRuntimeConfig.API_URL}/payed-articles`);
+  const res = await fetch(`${publicRuntimeConfig.API_URL}/payed-articles`, {
+    headers: {
+      Authorization: `Bearer ${loginResponse.jwt}`,
+    },
+  });
   const articles = await res.json();
 
   return {
