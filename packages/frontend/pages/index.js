@@ -2,13 +2,15 @@ import fetch from 'isomorphic-unfetch';
 import Card from 'components/Card';
 import { Flex, Box } from 'reflexbox';
 import theme from '../theme/theme';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
 const Home = ({ movies }) => {
-  console.log(movies);
+  const { t } = useTranslation('common');
   return (
     <Box theme={theme} variant="container">
       <Box my={40} as="h2">
-        Latest Movies
+        {t('Latest Movies')}
       </Box>
       <Flex
         justifyContent="space-between"
@@ -26,7 +28,7 @@ const Home = ({ movies }) => {
   );
 };
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ locale }) {
   const { API_URL } = process.env;
 
   const res = await fetch(`${API_URL}/movies`);
@@ -35,6 +37,7 @@ export async function getServerSideProps() {
   return {
     props: {
       movies: data,
+      ...(await serverSideTranslations(locale, ['common'])),
     },
   };
 }
