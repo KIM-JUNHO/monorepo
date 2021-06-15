@@ -1,24 +1,17 @@
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 function LanguageSwitcher() {
   const router = useRouter();
   return (
     <LanguageSwitcherStyled>
-      <button
-        type="button"
-        onClick={() => router.push(router.pathname, router.pathname, { locale: 'kr' })}
-        className={router.locale === 'kr' ? 'is-active' : ''}
-      >
-        KR
-      </button>
-      <button
-        type="button"
-        onClick={() => router.push(router.pathname, router.pathname, { locale: 'en' })}
-        className={router.locale === 'en' ? 'is-active' : ''}
-      >
-        EN
-      </button>
+      <Link href={router.asPath} locale={'kr'}>
+        <button className={router.locale === 'kr' ? 'is-active' : ''}>KR</button>
+      </Link>
+      <Link href={router.asPath} locale={'en'}>
+        <button className={router.locale === 'en' ? 'is-active' : ''}>EN</button>
+      </Link>
     </LanguageSwitcherStyled>
   );
 }
