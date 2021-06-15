@@ -12,8 +12,8 @@ function GenerateContent() {
 
     for (i = 0; i < count; i++) {
       const postData = {
-        Title: faker.lorem.sentence(),
-        Content: faker.lorem.paragraphs(),
+        title: faker.lorem.sentence(),
+        content: faker.lorem.paragraphs(),
       };
 
       const generate = await fetch(`${publicRuntimeConfig.API_URL}/posts`, {
