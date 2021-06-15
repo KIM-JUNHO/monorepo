@@ -4,11 +4,13 @@ import { Flex, Box } from 'reflexbox';
 import theme from '../theme/theme';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
+import Image from 'next/image';
 
 const Home = ({ movies }) => {
   const { t } = useTranslation('common');
   return (
     <Box theme={theme} variant="container">
+      <Image src="/images/chewy.jpg" width={2400} height={1600} quality={75} />
       <Box my={40} as="h2">
         {t('Latest Movies')}
       </Box>

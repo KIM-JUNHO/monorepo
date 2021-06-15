@@ -14,7 +14,7 @@ const Header = ({ isDark }) => {
           <div className="logo">
             <Link href="/">
               <a>
-                {/* <img src="/images/logo.svg" alt="Sites logo" /> */}
+                <img src="/images/logo.svg" alt="Sites logo" />
                 <span className="logo-text">Next Movies</span>
               </a>
             </Link>

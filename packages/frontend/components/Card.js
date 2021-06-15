@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Card = ({ movie }) => {
-  const { API_URL } = process.env;
+  const { IMAGES_DOMAIN } = process.env;
 
   if (!movie.genre) {
     movie.genre = {};
@@ -12,7 +13,9 @@ const Card = ({ movie }) => {
   return (
     <CardStyled>
       {movie.poster && (
-        <div className="poster">{/* <img src={API_URL + movie.poster.url} alt="" /> */}</div>
+        <div className="poster">
+          <Image src={IMAGES_DOMAIN + movie.poster.url} width={500} height={500} />
+        </div>
       )}
       <div className="body">
         <h3>{movie.title}</h3>
