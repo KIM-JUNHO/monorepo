@@ -5,7 +5,6 @@ import theme from '../theme/theme';
 import Navigation from './Navigation';
 import Link from 'next/link';
 import LanguageSwitcher from './LanguagesSwitcher';
-import ToggleNavigationColorButton from './ToggleNavigationColorButton';
 
 const Header = ({ isDark }) => {
   return (
@@ -22,7 +21,6 @@ const Header = ({ isDark }) => {
           </div>
           <Navigation />
           <LanguageSwitcher />
-          <ToggleNavigationColorButton />
         </Flex>
       </Box>
     </HeaderStyled>
