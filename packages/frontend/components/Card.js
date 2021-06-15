@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import propTypes from 'prop-types';
 
-const Card = ({ movie }) => {
+const Card = ({ movie, year }) => {
   const { IMAGES_DOMAIN } = process.env;
 
   if (!movie.genre) {
@@ -19,7 +19,9 @@ const Card = ({ movie }) => {
         </div>
       )}
       <div className="body">
-        <h3>{movie.title}</h3>
+        <h3>
+          {movie.title} - {year}
+        </h3>
         <p dangerouslySetInnerHTML={{ __html: movie.description }} />
 
         <Link href="/movies/[genre]/[slug]" as={`/movies/${movie.genre.slug}/${movie.slug}`}>
@@ -31,7 +33,15 @@ const Card = ({ movie }) => {
 };
 
 Card.propTypes = {
-  movie: propTypes.object.isRequired,
+  // movie: propTypes.oneOfType([propTypes.object, propTypes.array]),
+  movie: propTypes.shape({
+    id: propTypes.string,
+  }).isRequired,
+  year: propTypes.number,
+};
+
+Card.defaultProps = {
+  year: 1984,
 };
 
 const CardStyled = styled.div`
