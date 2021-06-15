@@ -6,9 +6,11 @@ import getConfig from 'next/config';
 import fetch from 'isomorphic-unfetch';
 import { DefaultSeo } from 'next-seo';
 import ContextWrapper from 'components/ContextWrapper';
-
 import SEO from '../next-seo.config';
 import { appWithTranslation } from 'next-i18next';
+import { QueryClientProvider, QueryClient } from 'react-query';
+
+const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps, navigation }) {
   return (
@@ -19,7 +21,9 @@ function MyApp({ Component, pageProps, navigation }) {
         <ContextWrapper navigation={navigation}>
           <Header />
         </ContextWrapper>
-        <Component {...pageProps} />
+        <QueryClientProvider client={queryClient}>
+          <Component {...pageProps} />
+        </QueryClientProvider>
       </ThemeProvider>
     </>
   );
