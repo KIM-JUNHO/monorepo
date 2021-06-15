@@ -8,9 +8,9 @@ import { DefaultSeo } from 'next-seo';
 import ContextWrapper from 'components/ContextWrapper';
 
 import SEO from '../next-seo.config';
+import { appWithTranslation } from 'next-i18next';
 
 function MyApp({ Component, pageProps, navigation }) {
-  console.log(navigation);
   return (
     <>
       <DefaultSeo {...SEO} />
@@ -33,4 +33,4 @@ MyApp.getInitialProps = async () => {
   return { navigation };
 };
 
-export default MyApp;
+export default appWithTranslation(MyApp);
