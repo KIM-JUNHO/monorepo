@@ -1,26 +1,33 @@
 import { Box } from 'reflexbox';
 import getConfig from 'next/config';
 import theme from '../theme/theme';
+import faker from 'faker';
 
 const { publicRuntimeConfig } = getConfig();
 
 function GenerateContent() {
   const addContent = async () => {
-    const postData = {
-      title: 'some title',
-      content: 'add some content',
-    };
+    let i;
+    let count = 1;
 
-    const generate = await fetch(`${publicRuntimeConfig.API_URL}/posts`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(postData),
-    });
-    const generateResponse = await generate.json();
-    console.log(generateResponse);
+    for (i = 0; i < count; i++) {
+      const postData = {
+        Title: faker.lorem.sentence(),
+        Content: faker.lorem.paragraphs(),
+      };
+
+      const generate = await fetch(`${publicRuntimeConfig.API_URL}/posts`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(postData),
+      });
+
+      const generateResponse = await generate.json();
+      console.log(generateResponse);
+    }
   };
   return (
     <Box theme={theme} variant="container">
