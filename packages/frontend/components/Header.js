@@ -5,6 +5,7 @@ import theme from '../theme/theme';
 import Navigation from './Navigation';
 import Link from 'next/link';
 import LanguageSwitcher from './LanguagesSwitcher';
+import ToggleNavigationColorButton from './ToggleNavigationColorButton';
 
 const Header = ({ isDark }) => {
   return (
@@ -14,13 +15,14 @@ const Header = ({ isDark }) => {
           <div className="logo">
             <Link href="/">
               <a>
-                <img src="/images/logo.svg" alt="Sites logo" />
+                {/* <img src="/images/logo.svg" alt="Sites logo" /> */}
                 <span className="logo-text">Next Movies</span>
               </a>
             </Link>
           </div>
           <Navigation />
           <LanguageSwitcher />
+          <ToggleNavigationColorButton />
         </Flex>
       </Box>
     </HeaderStyled>
