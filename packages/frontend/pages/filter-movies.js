@@ -6,7 +6,30 @@ import { useState } from 'react';
 
 const { API_URL } = process.env;
 
-const getMovies = async () => {
+const getMovies = async (key) => {
+  console.log(key);
+  const genreId = key.queryKey[1].genre;
+  const actorsIds = key.queryKey[2].actors.map((id) => `actors.id=${id}`);
+  console.log(actorsIds);
+
+  const actorsQueryString = actorsIds.join('&');
+  console.log(actorsQueryString);
+
+  if (genreId && actorsQueryString) {
+    const res = await fetch(`${API_URL}/movies?genre.id=${genreId}&${actorsQueryString}`);
+    return res.json();
+  }
+
+  if (genreId) {
+    const res = await fetch(`${API_URL}/movies?genre.id=${genreId}`);
+    return res.json();
+  }
+
+  if (actorsQueryString) {
+    const res = await fetch(`${API_URL}/movies?${actorsQueryString}`);
+    return res.json();
+  }
+
   const res = await fetch(`${API_URL}/movies`);
   return res.json();
 };
@@ -15,7 +38,11 @@ const FilterMovies = ({ movies, actors, genres }) => {
   const queryClient = useQueryClient();
   const [genreId, setGenreId] = useState(null);
   const [actorsIds, setActors] = useState([]);
-  const { data, status } = useQuery('movies', getMovies, { initialData: movies });
+  const { data, status } = useQuery(
+    ['movies', { genre: genreId }, { actors: actorsIds }],
+    getMovies,
+    { initialData: movies }
+  );
 
   return (
     <>
@@ -27,7 +54,7 @@ const FilterMovies = ({ movies, actors, genres }) => {
         <Flex mb={100}>
           <Box width={200} mr={20}>
             <Select
-              getOptionLabel={(option) => `${option.first_name + option.last_name}`}
+              getOptionLabel={(option) => `${option.first_name} ${option.last_name}`}
               getOptionValue={(option) => option.id}
               options={actors}
               instanceId="actors"
