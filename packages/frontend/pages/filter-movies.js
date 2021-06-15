@@ -1,11 +1,22 @@
 import { Flex, Box } from 'reflexbox';
 import theme from '../theme/theme';
 import Select from 'react-select';
+import { useQuery, useQueryClient } from 'react-query';
+import { useState } from 'react';
+
+const { API_URL } = process.env;
+
+const getMovies = async () => {
+  const res = await fetch(`${API_URL}/movies`);
+  return res.json();
+};
 
 const FilterMovies = ({ movies, actors, genres }) => {
-  const handleActors = (values) => {
-    console.log(values);
-  };
+  const queryClient = useQueryClient();
+  const [genreId, setGenreId] = useState(null);
+  const [actorsIds, setActors] = useState([]);
+  const { data, status } = useQuery('movies', getMovies, { initialData: movies });
+
   return (
     <>
       <Box theme={theme} variant="container">
@@ -22,22 +33,36 @@ const FilterMovies = ({ movies, actors, genres }) => {
               instanceId="actors"
               isMulti
               placeholder="Filter by Actors"
-              onChange={(values) => handleActors(values.map((actor) => actor.id))}
+              onChange={(values) => setActors(values.map((actor) => actor.id))}
+            />
+            <br />
+            <Select
+              getOptionLabel={(option) => option.title}
+              getOptionValue={(option) => option.id}
+              options={genres}
+              instanceId="genres"
+              placeholder="Filter by Genres"
+              isClearable
+              onChange={(value) => setGenreId(value ? value.id : null)}
             />
           </Box>
           <Box>
-            {movies.map((movie) => (
-              <Box key={movie.id} p={10}>
-                <strong>{movie.title}</strong> - {movie.genre ? movie.genre.title : null}
-                <br />
-                {movie.actors.length > 0 &&
-                  movie.actors.map((actor) => (
-                    <small key={actor.id}>
-                      {actor.first_name} {actor.last_name} &nbsp;
-                    </small>
-                  ))}
-              </Box>
-            ))}
+            {status === 'loading' && <div>I'm loading your movies</div>}
+            {status === 'error' && <div>Something went wrong</div>}
+
+            {status === 'success' &&
+              data.map((movie) => (
+                <Box key={movie.id} p={10}>
+                  <strong>{movie.title}</strong> - {movie.genre ? movie.genre.title : null}
+                  <br />
+                  {movie.actors.length > 0 &&
+                    movie.actors.map((actor) => (
+                      <small key={actor.id}>
+                        {actor.first_name} {actor.last_name} &nbsp;
+                      </small>
+                    ))}
+                </Box>
+              ))}
           </Box>
         </Flex>
       </Box>
