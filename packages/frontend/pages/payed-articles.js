@@ -1,9 +1,9 @@
 import { Box } from 'reflexbox';
 import getConfig from 'next/config';
 import theme from '../theme/theme';
+import { parseCookies } from 'nookies';
 
-function PayedArticles({ articles, authData }) {
-  console.log(articles, authData);
+function PayedArticles({ articles }) {
   return (
     <>
       <Box theme={theme} variant="container">
@@ -24,24 +24,10 @@ function PayedArticles({ articles, authData }) {
 const { publicRuntimeConfig } = getConfig();
 
 export async function getServerSideProps(ctx) {
-  const loginInfo = {
-    identifier: 'author',
-    password: 'strapi',
-  };
-
-  const login = await fetch(`${publicRuntimeConfig.API_URL}/auth/local`, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(loginInfo),
-  });
-  const loginResponse = await login.json();
-
+  const jwt = parseCookies(ctx).jwt;
   const res = await fetch(`${publicRuntimeConfig.API_URL}/payed-articles`, {
     headers: {
-      Authorization: `Bearer ${loginResponse.jwt}`,
+      Authorization: `Bearer ${jwt}`,
     },
   });
   const articles = await res.json();
@@ -49,7 +35,6 @@ export async function getServerSideProps(ctx) {
   return {
     props: {
       articles: articles,
-      authData: loginResponse,
     },
   };
 }

@@ -3,10 +3,13 @@ import getConfig from 'next/config';
 import styled from '@emotion/styled';
 import theme from '../theme/theme';
 import { useState } from 'react';
+import { setCookie } from 'nookies';
+import { useRouter } from 'next/router';
 
 const { publicRuntimeConfig } = getConfig();
 
 function Login() {
+  const router = useRouter();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -27,7 +30,12 @@ function Login() {
 
     const loginResponse = await login.json();
 
-    console.log(loginResponse);
+    setCookie(null, 'jwt', loginResponse.jwt, {
+      maxAge: 30 * 24 * 60 * 60,
+      path: '/',
+    });
+
+    router.push('/');
   }
 
   return (
