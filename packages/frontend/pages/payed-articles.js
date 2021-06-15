@@ -1,11 +1,12 @@
 import { Box } from 'reflexbox';
 import getConfig from 'next/config';
+import theme from '../theme/theme';
 
 function PayedArticles({ articles, authData }) {
   console.log(articles, authData);
   return (
     <>
-      <Box variant="container">
+      <Box theme={theme} variant="container">
         <Box as="h2" my={40}>
           Payed Articles
         </Box>
