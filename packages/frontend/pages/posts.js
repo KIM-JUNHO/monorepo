@@ -1,10 +1,10 @@
 import Post from 'components/Post';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Flex, Box } from 'reflexbox';
 import theme from '../theme/theme';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-const Posts = ({ data }) => {
+const Posts = ({ data, numberOfPosts }) => {
   const { API_URL } = process.env;
   const [posts, setPosts] = useState(data);
   const [hasMore, setHasMore] = useState(true);
@@ -14,6 +14,11 @@ const Posts = ({ data }) => {
     const newPosts = await res.json();
     setPosts((posts) => [...posts, ...newPosts]);
   };
+
+  useEffect(() => {
+    setHasMore(numberOfPosts > posts.length ? true : false);
+  }, [posts]);
+
   return (
     <Box theme={theme} variant="container">
       <Box my={40} as="h2">
@@ -44,9 +49,13 @@ export async function getServerSideProps() {
   const res = await fetch(`${API_URL}/posts?_limit=10`);
   const data = await res.json();
 
+  const getNumberOfPosts = await fetch(`${API_URL}/posts/count`);
+  const numberOfPosts = await getNumberOfPosts.json();
+
   return {
     props: {
       data,
+      numberOfPosts: +numberOfPosts,
     },
   };
 }
