@@ -1,7 +1,11 @@
 import { Flex, Box } from 'reflexbox';
 import theme from '../theme/theme';
+import Select from 'react-select';
 
-const FilterMovies = ({ movies }) => {
+const FilterMovies = ({ movies, actors, genres }) => {
+  const handleActors = (values) => {
+    console.log(values);
+  };
   return (
     <>
       <Box theme={theme} variant="container">
@@ -11,7 +15,15 @@ const FilterMovies = ({ movies }) => {
 
         <Flex mb={100}>
           <Box width={200} mr={20}>
-            Filters go here
+            <Select
+              getOptionLabel={(option) => `${option.first_name + option.last_name}`}
+              getOptionValue={(option) => option.id}
+              options={actors}
+              instanceId="actors"
+              isMulti
+              placeholder="Filter by Actors"
+              onChange={(values) => handleActors(values.map((actor) => actor.id))}
+            />
           </Box>
           <Box>
             {movies.map((movie) => (
